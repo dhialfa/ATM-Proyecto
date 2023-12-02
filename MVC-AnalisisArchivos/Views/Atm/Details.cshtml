@@ -1,0 +1,50 @@
+﻿@model MVC_AnalisisArchivos.Models.DTO.AtmParameterDTO
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AtmParameterDTO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenBill)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenBill)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TwentyBill)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TwentyBill)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Balance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Balance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OutServiceMessage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OutServiceMessage)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
