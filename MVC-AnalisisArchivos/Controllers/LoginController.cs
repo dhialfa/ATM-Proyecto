@@ -27,6 +27,10 @@ namespace MVC_AnalisisArchivos.Controllers
         {
             userDTO = userDAO.ReadUser(email);
             TempData["UserId"] = user.Id;
+            if (user.VerifyCode(password, userDTO.Code))
+            {
+                return Redirect("/");
+            }
             return Redirect("/MainView/MainView");
         }
 
