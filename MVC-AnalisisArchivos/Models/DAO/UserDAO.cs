@@ -112,8 +112,40 @@ namespace MVC_AnalisisArchivos.Models.DAO
             {
                 Console.WriteLine("Error in ReadUser: " + error.Message);
             }
-            // Just to verify if function work well
-            user.VerifyCode("5678", user.Code);
+
+            return user;
+        }
+        public UserDTO ReadUser(string email)
+        {
+            UserDTO user = new UserDTO();
+
+            try
+            {
+                using (MySqlConnection connection = SecurityConfig.GetConnection())
+                {
+                    connection.Open();
+                    string readUserQuery = "SELECT * FROM ada_users WHERE email = @pEmail";
+                    using (MySqlCommand command = new MySqlCommand(readUserQuery, connection))
+                    {
+                        command.Parameters.AddWithValue("@pEmail", email);
+
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                MapUserFromReader(reader, user);
+
+                            }
+                        }
+                    }
+
+                    connection.Close();
+                }
+            }
+            catch (Exception error)
+            {
+                Console.WriteLine("Error in ReadUser: " + error.Message);
+            }
 
             return user;
         }

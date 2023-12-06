@@ -48,17 +48,18 @@ namespace MVC_AnalisisArchivos.Models.DTO
         }
 
         public bool VerifyCode(string userProvidedCode, string storedHashedCode)
-        {
+        {   
             using (SHA256 sha256 = SHA256.Create())
             {
                 // Calculate the hash of the user-supplied code
                 byte[] userProvidedCodeBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(userProvidedCode));
-                string hashedUserCode = BitConverter.ToString(userProvidedCodeBytes, 0, 3).Replace("-", "").ToLower();
+                string hashedUserCode = BitConverter.ToString(userProvidedCodeBytes).Replace("-", "").ToLower();
 
                 // Compare the calculated hash with the hash stored in the database
                 return hashedUserCode == storedHashedCode;
             }
         }
+
 
         // Method to generate the account number
         public int GenerateAccountNumber()

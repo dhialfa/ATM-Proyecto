@@ -20,9 +20,14 @@ namespace MVC_AnalisisArchivos
 
             );
             routes.MapRoute(
-               name: "Login",
-               url: "Account/Login",
-               defaults: new { controller = "Account", action = "Login" }
+                name: "Login",
+                url: "Login/Login",
+                defaults: new { controller = "Login", action = "Login" }
+        );
+            routes.MapRoute(
+               name: "MainView",
+               url: "MainView/MainView",
+               defaults: new { controller = "MainView", action = "MainView" }
        );
         }
     }

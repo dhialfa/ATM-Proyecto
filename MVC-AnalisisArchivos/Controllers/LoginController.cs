@@ -1,48 +1,38 @@
-﻿using MVC_AnalisisArchivos.Models.DTO;
+﻿using MVC_AnalisisArchivos.Models.DAO;
+using MVC_AnalisisArchivos.Models.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MVC_AnalisisArchivos.Models.DTO;
+using MVC_AnalisisArchivos.Models.DAO;
+
+
 
 namespace MVC_AnalisisArchivos.Controllers
-{
+{   
     public class LoginController : Controller
     {
+        private UserDTO userDTO = new UserDTO();
+        private UserDAO userDAO = new UserDAO();
         public ActionResult Login()
-        {
+        {   
             return View();
         }
-
+        UserDTO user = new UserDTO();
         // POST: Account/Login
         [HttpPost]
-        public ActionResult Login(UserDTO user)
+        public ActionResult Login(string email, string password)
         {
-            // Aquí deberías validar el usuario y contraseña con la lógica de tu aplicación
-            // Por ahora, simplemente redireccionamos a una página de inicio si el modelo es válido
-            if (ModelState.IsValid)
-            {
-                // Realiza la lógica de autenticación aquí
-                // Puedes utilizar el método VerifyCode para verificar la contraseña
-                // (Asumiendo que estás utilizando la función ObfuscateCode para almacenar contraseñas)
-
-                // Ejemplo:
-                string storedHashedCode = ObtenerHashAlmacenadoDesdeLaBaseDeDatos(user.Email); // Aquí deberías obtener el hash almacenado en la base de datos
-                if (user.VerifyCode(user.Code, storedHashedCode))
-                {
-                    // Autenticación exitosa, redirige a la página principal
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    // Autenticación fallida, agrega un mensaje de error
-                    ModelState.AddModelError("", "Credenciales no válidas. Por favor, inténtalo de nuevo.");
-                }
-            }
-
-            // Si llegamos a este punto, hay un error; vuelve a mostrar el formulario con los errores
-            return View(user);
+            userDTO = userDAO.ReadUser(email);
+            TempData["UserId"] = user.Id;
+            return Redirect("/MainView/MainView");
         }
+
+
+
+ 
 
         // Método de ejemplo para obtener el hash almacenado desde la base de datos
         private string ObtenerHashAlmacenadoDesdeLaBaseDeDatos(string email)

@@ -7,7 +7,7 @@
 
 <h2>Iniciar Sesión</h2>
 
-@using (Html.BeginForm("Login", "Account", FormMethod.Post))
+@using (Html.BeginForm("Login", "Login", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -19,7 +19,7 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.Code)
-        @Html.PasswordFor(model => model.Code, new { @class = "form-control" })
+        @Html.TextBoxFor(model => model.Code, new { @class = "form-control" })
         @Html.ValidationMessageFor(model => model.Code)
     </div>
 

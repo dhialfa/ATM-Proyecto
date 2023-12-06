@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "View";
+    Layout = "mainView";
+}
+
+<h2>View</h2>@model MVC_AnalisisArchivos.Models.DTO.UserDTO
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Operaciones Bancarias</title>
+</head>
+<body>
+    <h2>Operaciones Bancarias</h2>
+    <p>Usuario ID: </p>
+
+    <form method="post" asp-page-handler="RealizarOperacion">
+        <button type="submit" name="operacion" value="ConsultaSaldo">Consultar Saldo</button>
+        <button type="submit" name="operacion" value="RetirarDinero">Retirar Dinero</button>
+        <button type="submit" name="operacion" value="Salir">Salir</button>
+    </form>
+</body>
+</html>
+
